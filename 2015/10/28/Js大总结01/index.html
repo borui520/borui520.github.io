@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Borui520" />
+
+
+
+<meta name="description" content="Js大总结笔记01
+javascript事务查询综合点击网页正文函数调用触发器IE功能汇总哄骗脚本封装，便利实现网站悬浮告白[原创]本身定义的简单办法验证表单数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Js大总结">
+<meta property="og:url" content="http://yoursite.com/2015/10/28/Js大总结01/index.html">
+<meta property="og:site_name" content="Borui的技术博客">
+<meta property="og:description" content="Js大总结笔记01
+javascript事务查询综合点击网页正文函数调用触发器IE功能汇总哄骗脚本封装，便利实现网站悬浮告白[原创]本身定义的简单办法验证表单数据">
+<meta property="og:updated_time" content="2016-10-18T05:24:48.697Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Js大总结">
+<meta name="twitter:description" content="Js大总结笔记01
+javascript事务查询综合点击网页正文函数调用触发器IE功能汇总哄骗脚本封装，便利实现网站悬浮告白[原创]本身定义的简单办法验证表单数据">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Borui的技术博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Js大总结 | Borui的技术博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Borui520</a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=27GyuoSisrW8ubSbqqr1uLS2" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/borui520" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/feng-nian-hua-3" title="知乎"></a>
+                            
+                                <a class="fa 博客园" href="http://weibo.com/233862789?refer_flag=1005055010_" title="博客园"></a>
+                            
+                                <a class="fa QQ" href="http://wpa.qq.com/pa?p=1:274782997:1" title="QQ"></a>
+                            
+                                <a class="fa 微信" href="/274782997" title="微信"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Js命令大全-带实例讲解-详细版/">Js命令大全 带实例讲解 (详细版)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术狂/">技术狂</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://borui520.github.io/">Borui520</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Borui520</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Borui520</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=27GyuoSisrW8ubSbqqr1uLS2" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/borui520" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/feng-nian-hua-3" title="知乎"></a>
+                            
+                                <a class="fa 博客园" target="_blank" href="http://weibo.com/233862789?refer_flag=1005055010_" title="博客园"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="http://wpa.qq.com/pa?p=1:274782997:1" title="QQ"></a>
+                            
+                                <a class="fa 微信" target="_blank" href="/274782997" title="微信"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+</nav>
+      <div class="body-wrap"><article id="post-Js大总结01" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/28/Js大总结01/" class="article-date">
+      <time datetime="2015-10-28T14:18:09.000Z" itemprop="datePublished">2015-10-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Js大总结
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Js命令大全-带实例讲解-详细版/">Js命令大全 带实例讲解 (详细版)</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Js大总结笔记01"><a href="#Js大总结笔记01" class="headerlink" title="Js大总结笔记01"></a>Js大总结笔记01</h1><blockquote>
+<p>javascript事务查询综合<br>点击网页正文函数调用触发器<br>IE功能汇总<br>哄骗脚本封装，便利实现网站悬浮告白<br>[原创]本身定义的简单办法验证表单数据 </p>
+</blockquote>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<h2 id="javascript事务查询综合"><a href="#javascript事务查询综合" class="headerlink" title="javascript事务查询综合"></a>javascript事务查询综合</h2><p>click（） 对象.click（） 使对象被点击。<br>closed 对象.closed 对象窗口是否已封闭true/false<br>clearTimeout（对象） 清除已设置的setTimeout对象<br>clearInterval（对象） 清除已设置的setInterval对象<br>confirm（”提示信息”） 弹出确认框，断定返回true作废返回false<br>cursor:样式 更改鼠标样式 hand crosshair text wait help default auto e/s/w/n-resize</p>
+<p>event.clientX 返回最后一次点击鼠标X坐标值；<br>event.clientY 返回最后一次点击鼠标Y坐标值；<br>event.offsetX 返回当前鼠标悬停X坐标值<br>event.offsetY 返回当前鼠标悬停Y坐标值</p>
+<p>document.write（document.lastModified） 网页最后一次更新时候<br>document.ondblclick=x 当双击鼠标产闹事务<br>document.onmousedown=x 单击鼠标键产闹事务</p>
+<p>document.body.scrollTop; 返回和设置当前竖向迁移转变条的坐标值，须与函数共同，<br>document.body.scrollLeft; 返回和设置当前横向迁移转变务的坐标值，须与函数共同，<br>document.title document.title=”message”; 当前窗口的题目栏文字<br>document.bgcolor document.bgcolor=”色彩值”; 改变窗口靠山色彩<br>document.Fgcolor document.Fgcolor=”色彩值”; 改变正文色彩<br>document.linkcolor document.linkcolor=”色彩值”; 改变超联接色彩<br>document.alinkcolor document.alinkcolor=”色彩值”; 改变正点击联接的色彩<br>document.VlinkColor document.VlinkColor=”色彩值”; 改变已接见联接的色彩<br>document.forms.length 返回当前页form表单数<br>document.anchors.length 返回当前页锚的数量<br>document.links.length 返回当前页联接的数量<br>document.onmousedown=x 单击鼠标触发事务<br>document.ondblclick=x 双击鼠标触发事务<br>defaultStatus window.status=defaultStatus; 将状况栏设置默认显示</p>
+<p>function function xx（）{…} 定义函数<br>isNumeric 断定是否是数字<br>innerHTML xx=对象.innerHTML 输入某对象标签中的html源代码<br>innerText divid.innerText=xx 将以div定位以id定名的对象值设为XX</p>
+<p>location.reload（）; 使本页刷新，target可便是一个刷新的网页</p>
+<p>Math.random（） 随机涵数，只能是0到1之间的数，若是要获得其它数，可认为*10，再取整<br>Math.floor（number） 将对象number转为整数，舍取所有小数<br>Math.min（1，2） 返回1，2哪个小<br>Math.max（1，2） 返回1，2哪个大</p>
+<p>navigator.appName 返回当前浏览器名称<br>navigator.appVersion 返回当前浏览器版本号<br>navigator.appCodeName 返回当前浏览器代码名字<br>navigator.userAgent 返回当前浏览器用户代标记</p>
+<p>onsubmit onsubmit=”return（xx（））” 应用函数返回值<br>opener opener.document.对象 把握原打开窗体对象</p>
+<p>prompt xx=window.prompt（”提示信息”，”预定值”）; 输入语句<br>parent parent.框架名.对象 把握框架页面</p>
+<p>return return false 返回值<br>random 随机参数（0至1之间）<br>reset（） form.reset（）; 使form表单内的数据重置</p>
+<p>split（””） string.split（””） 将string对象字符以逗号隔开<br>submit（） form对象.submit（） 使form对象提交数据</p>
+<p>String对象的 charAt（x）对象 反回指定对象的第几许位的字母<br>lastIndexOf（”string”） 从右到左询找指定字符，没有返回-1<br>indexOf（”string”） 从左到右询找指定字符，没有返回-1<br>LowerCase（） 将对象全部转为小写<br>UpperCase（） 将对象全部转为大写<br>substring（0，5） string.substring（x，x） 返回对象中从0到5的字符<br>setTimeout（”function”，time） 设置一个超时对象<br>setInterval（”function”，time） 设置一个超时对象</p>
+<p>toLocaleString（） x.toLocaleString（） 从x时候对象中获取时候，以字符串型式存在<br>typeof（变量名） 搜检变量的类型，值有：String，Boolean，Object，Function，Underfined</p>
+<p>window.event.button==1/2/3 鼠标键左键便是1右键便是2两个键一路按为3<br>window.screen.availWidth 返回当前屏幕宽度（空白空间）<br>window.screen.availHeight 返回当前屏幕高度（空白空间）<br>window.screen.width 返回当前屏幕宽度（辨别率值）<br>window.screen.height 返回当前屏幕高度（辨别率值）<br>window.document.body.offsetHeight; 返回当前网页高度<br>window.document.body.offsetWidth; 返回当前网页宽度<br>window.resizeTo（0，0） 将窗口设置宽高<br>window.moveTo（0，0） 将窗口移到某地位<br>window.focus（） 使当前窗口获得核心<br>window.scroll（x，y） 窗口迁移转变条坐标，y把握高低移动，须与函数共同<br>window.open（） window.open（”地址”，”名称”，”属性”）<br>属性:toolbar（对象栏），location（地址栏），directions，status（状况栏），<br>menubar（菜单栏），scrollbar（迁移转变条），resizable（改变大小）， width（宽），height（高），fullscreen（全 屏），scrollbars（全屏时无迁移转变条无参 数，channelmode（宽屏），left（打开窗口x坐标），top（打开窗口y坐标）<br>window.location = “”view-source:”” + window.location.href 应用事务查看网页源代码;</p>
+<p>a=new Date（）; //创建a为一个新的时代对象<br>y=a.getYear（）; //y的值为从对象a中获取年份值 两位数年份<br>y1=a.getFullYear（）; //获取全年份数 四位数年份<br>m=a.getMonth（）; //获取月份值<br>d=a.getDate（）; //获取日期值<br>d1=a.getDay（）; //获取当前礼拜值<br>h=a.getHours（）; //获取当前小时数<br>m1=a.getMinutes（）; //获取当前分钟数<br>s=a.getSeconds（）; //获取当前秒钟数</p>
+<p>对象.style.fontSize=”文字大小”;<br>单位：mm/cm/in英寸/pc帕/pt点/px象素/em文字高<br>1in=1.25cm<br>1pc=12pt<br>1pt=1.2px（800*600分辨率下）</p>
+<p>文本字体属性：<br>fontSize大小<br>family字体<br>color色彩<br>fontStyle风格，取值为normal一般，italic斜体，oblique斜体且加粗<br>fontWeight加粗，取值为100到900不等，900最粗，light，normal，bold<br>letterSpacing间距，更改文字间间隔，取值为，1pt，10px，1cm<br>textDecoration:文字润饰;取值，none不润饰，underline下划线，overline上划线<br>background:文字靠山色彩，<br>backgroundImage:靠山图片，取值为图片的插入路径</p>
+<h2 id="点击网页正文函数调用触发器："><a href="#点击网页正文函数调用触发器：" class="headerlink" title="点击网页正文函数调用触发器："></a>点击网页正文函数调用触发器：</h2><p>1.onClick 当对象被点击<br>2.onLoad 当网页打开，只能书写在body中<br>3.onUnload 当网页封闭或分开时，只能书写在body中<br>4.onmou搜刮引擎优化ver 当鼠标悬于其上时<br>5.onmou搜刮引擎优化ut 当鼠标分开对象时<br>6.onmouseup 当鼠标松开<br>7.onmousedown 当鼠标按下键<br>8.onFocus 当对象获取核心时<br>9.onSelect 当对象的文本被选中时<br>10.onChange 当对象的内容被改变<br>11.onBlur 当对象落空核心<br>onsubmit=return（ss（））表单调用时返回的值</p>
+<p>直线 border-bottom:1x solid black<br>虚线 border-bottom:1x dotted black<br>点划线 border-bottom:2x dashed black<br>双线 border-bottom:5x double black<br>槽状 border-bottom:1x groove black<br>脊状 border-bottom:1x ridge black</p>
+<p>1.边沿高光glow（color=色彩，strength=亮光大小）<br><br>2.程度翻转fliph（） 使对象程度翻转180度<br><br>3.垂直翻转flipv（） 使对象垂直翻转180度<br><br>4.对象模糊blur（add=true/false direction=标的目标 strength=强度）<br>add指定是否按印象画派进行模糊direction模糊标的目标strength模糊强度<br>5.对象透明alpha（opaction=0-100，finishopacity=0-100，style=0/1/2/3）<br>opaction对象整体不透明值finishopacity当对象哄骗了渐透明时该项指定停止透明地位的不透明值style指定透明体式格式0为整体透明，1为线型透明，2为圆型透明，3为矩形透明<br>6.去除色彩chroma（color=色彩值）使对象中色彩与指定色彩雷同区域透明<br>7.建树暗影dropshadow（color=暗影色彩，offx=程度向左偏离像素，offy=程度向下偏离像素）<br>8.去色gray（）使对象呈灰度显示<br>9.负片结果invert（）使对象呈底片结果<br>10.高光light（）使对象呈黑色显示<br>11.隐瞒mask（color=色彩）使全部对象以指定色彩进行蒙板一次</p>
+<p>opacity 表透明度程度.0~100，0表全透明，100表完全不透明<br>finishopacity表想要设置的渐变透明结果.0~100.<br>style 表透明区的外形.0表同一外形.1表线形.2表放射形.3表长方形.<br>startx.starty表渐变透明结果的开端时X和Y坐标.<br>finishx，finishy渐变透明结果停止时x，y 的坐标.<br>add有来断定是否在模糊结果中使有原有目标.值为0，1.0表”否”，1表”是”.<br>direction设置模糊的标的目标.0度表垂直向上，45度为一个单位.默认值是向左270度.left，right，down，up.<br>strength 只能用整数来断定.代表有几许个像素的宽度将受到模糊影响.默认是5个.<br>color要透明的色彩.<br>offx，offy分别是x，y 标的目标暗影的偏移量.<br>positive指投影体式格式.0表透明像素生成暗影.1表只给出不透明像素生成暗影..</p>
+<p>AddAmbient:参加包抄的光源.<br>AddCone:参加锥形光源.<br>AddPoint参加点光源<br>Changcolor:改变光的色彩．<br>Changstrength:改变光源的强度．<br>Clear:清除所有的光源．<br>MoveLight:移动光源．</p>
+<p>freq是波纹的频率，在指定在对象上一区须要产生几许个完事的波纹．<br>lightstrength可对于波纹加强光影的结果．明显0~100正整数，正弦波开端地位是0~360度．0表从0度开端，25表从90度开端．<br>strength表振幅大小．</p>
+<p>hand style=”cursor:hand”<br>crosshair style=”cursor:crosshair”<br>text style=”cursor:text”<br>wait style=”cursor:wait”<br>default style=”cursor:default”<br>help style=”cursor:help”<br>e-resize style=”cursor:e-resize”<br>ne-resize style=”cursor:ne-resize”<br>n-resize style=”cursor:n-resize”<br>nw-resize style=”cursor:nw-resize”<br>w-resize style=”cursor:w-resize”<br>s-resize style=”cursor:s-resize”<br>sw-resize style=”cursor:sw-resize “<br>se-resize style=”cursor:se-resize”<br>auto style=”cursor:auto”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;</div><div class="line">&lt;HTML&gt;</div><div class="line">&lt;HEAD&gt;</div><div class="line">&lt;TITLE&gt; 数字输入把握，给数字加上千分符 &lt;/TITLE&gt;</div><div class="line">&lt;META NAME=&quot;Generator&quot; CONTENT=&quot;EditPlus&quot;&gt;</div><div class="line">&lt;META NAME=&quot;Author&quot; CONTENT=&quot;&quot;&gt;</div><div class="line">&lt;META NAME=&quot;Keywords&quot; CONTENT=&quot;&quot;&gt;</div><div class="line">&lt;META NAME=&quot;Description&quot; CONTENT=&quot;&quot;&gt;</div><div class="line">&lt;style&gt;</div><div class="line">.inputRight &#123;</div><div class="line"> text-align: right;</div><div class="line"> border: 1px ＃666666  dashed;  </div><div class="line"> font-size: 9pt; </div><div class="line"> color: ＃993366; </div><div class="line"> height: 18px; </div><div class="line"> ime-mode : disabled;</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;SCRIPT LANGUAGE=&quot;JavaScript&quot;&gt;</div><div class="line">/*</div><div class="line">这些功能建议经由过程HTC来实现</div><div class="line">*/</div><div class="line">////////////</div><div class="line">//数字输入把握</div><div class="line">function FormatInput（dotlen）</div><div class="line">&#123;</div><div class="line">var myEle=event.srcElement;</div><div class="line">var myValue=String.CharCode（event.keyCode）;</div><div class="line">if （myEle.readOnly）</div><div class="line">&#123;</div><div class="line">return;</div><div class="line">&#125;</div><div class="line">switch（dotlen）</div><div class="line">&#123;</div><div class="line">//原正则表达式（可以输入负数）:/^[\-]？\d*\.？\d&#123;0，0&#125;￥/</div><div class="line">case 0:&#123;event.returnValue = regInput（myEle， /^\d*\.？\d&#123;0，0&#125;￥/，  myValue）; break;&#125;</div><div class="line">case 1:&#123;event.returnValue = regInput（myEle， /^\d*\.？\d&#123;0，1&#125;￥/，  myValue）; break;&#125;</div><div class="line">case 2:&#123;event.returnValue = regInput（myEle， /^\d*\.？\d&#123;0，2&#125;￥/，  myValue）; break;&#125;</div><div class="line">case 3:&#123;event.returnValue = regInput（myEle， /^\d*\.？\d&#123;0，3&#125;￥/，  myValue）; break;&#125;</div><div class="line">case 4:&#123;event.returnValue = regInput（myEle， /^\d*\.？\d&#123;0，4&#125;￥/，  myValue）; break;&#125;</div><div class="line">case 5:&#123;event.returnValue = regInput（myEle， /^\d*\.？\d&#123;0，5&#125;￥/，  myValue）; break;&#125;</div><div class="line">case 6:&#123;event.returnValue = regInput（myEle， /^\d*\.？\d&#123;0，6&#125;￥/，  myValue）; break;&#125;</div><div class="line">case 7:&#123;event.returnValue = regInput（myEle， /^\d*\.？\d&#123;0，7&#125;￥/，  myValue）; break;&#125;</div><div class="line">case 8:&#123;event.returnValue = regInput（myEle， /^\d*\.？\d&#123;0，8&#125;￥/，  myValue）; break;&#125;</div><div class="line">default :&#123;event.returnValue = regInput（myEle， /^\d*\.？\d&#123;0，0&#125;￥/，  myValue）; break;&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">function regInput（obj， reg， inputStr）</div><div class="line">&#123;</div><div class="line">var docSel = document.ion.createRange（）</div><div class="line">if （docSel.parentElement（）.tagName != &quot;INPUT&quot;） return false</div><div class="line">oSel = docSel.duplicate（）</div><div class="line">oSel.text = &quot;&quot;</div><div class="line">var srcRange = obj.createTextRange（）</div><div class="line"></div><div class="line"></div><div class="line">oSel.setEndPoint（&quot;StartToStart&quot;， srcRange）</div><div class="line">var str = oSel.text + inputStr + srcRange.text.substr（oSel.text.length）</div><div class="line">return reg.test（str）</div><div class="line">&#125;</div><div class="line">//给数字加上千分符 by yuanzy </div><div class="line">function splitNumber（eValue）</div><div class="line">&#123;</div><div class="line">var intPart = &quot;&quot;;</div><div class="line">var decPart = &quot;&quot;;</div><div class="line">if （eValue.indexOf（&quot;，&quot;）&gt;=0）</div><div class="line">&#123;</div><div class="line">eValue=eValue.replace（/，/g，&quot;&quot;）;</div><div class="line">&#125;</div><div class="line">if （eValue.indexOf（&quot;.&quot;）&gt;=0）</div><div class="line">&#123;</div><div class="line">intPart=eValue.split（&quot;.&quot;）[0];</div><div class="line">decPart=eValue.split（&quot;.&quot;）[1];</div><div class="line">&#125;</div><div class="line">else</div><div class="line">&#123;</div><div class="line">intPart = eValue;</div><div class="line">&#125;</div><div class="line">var num  =  intPart+&quot;&quot;;  </div><div class="line">    var  re=/（-？\d+）（\d&#123;3&#125;）/  </div><div class="line">    while（re.test（num））&#123;  </div><div class="line">num=num.replace（re，&quot;￥1，￥2&quot;）  </div><div class="line">    &#125;  </div><div class="line">if （eValue.indexOf（&quot;.&quot;）&gt;=0）</div><div class="line">&#123;</div><div class="line">eValue=num + &quot;.&quot; + decPart;</div><div class="line">&#125;</div><div class="line">else</div><div class="line">&#123;</div><div class="line">eValue=num ;</div><div class="line">&#125;</div><div class="line">return eValue;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">function oFocus（）</div><div class="line">&#123;</div><div class="line">if （event.srcElement.readOnly） return;</div><div class="line">event.srcElement.value=event.srcElement.value.replace（/，/g，&quot;&quot;）;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">function oBlur（）</div><div class="line">&#123;</div><div class="line">if （event.srcElement.value==&quot;-&quot;）</div><div class="line">&#123;</div><div class="line">event.srcElement.value=&quot;&quot;;</div><div class="line">&#125;</div><div class="line">event.srcElement.value = splitNumber（event.srcElement.value）;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">&lt;/SCRIPT&gt;</div><div class="line">&lt;/HEAD&gt;</div><div class="line"></div><div class="line">&lt;BODY&gt;</div><div class="line"></div><div class="line">&lt;input class=&quot;inputRight&quot; type=&quot;&quot;text&quot;&quot;  onfocus=&quot;oFocus（）;&quot; onblur=&quot;oBlur（）;&quot; onKeypress=&quot;FormatInput（2）;&quot; &gt;</div><div class="line">&lt;/BODY&gt;</div><div class="line">&lt;/HTML&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="IE功能汇总"><a href="#IE功能汇总" class="headerlink" title="IE功能汇总"></a>IE功能汇总</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">&lt;OBJECT id=WebBrowser height=0 width=0 </div><div class="line">      classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2&gt;&lt;/OBJECT&gt;</div><div class="line">&lt;INPUT onclick=document.all.WebBrowser.WB（1，1） type=button value=打开 name=Button1&gt; </div><div class="line">&lt;INPUT onclick=document.all.WebBrowser.WB（4，1） type=button value=另存为 name=Button2&gt; </div><div class="line">&lt;INPUT onclick=document.all.WebBrowser.WB（10，1） type=button value=属性 name=Button3&gt; </div><div class="line">&lt;INPUT onclick=document.all.WebBrowser.WB（6，1） type=button value=打印 name=Button&gt; </div><div class="line">&lt;INPUT onclick=document.all.WebBrowser.WB（8，1） type=button value=页面设置 name=Button4&gt; </div><div class="line">&lt;INPUT onclick=window.location.reload（） type=button value=刷新 name=refresh&gt; </div><div class="line">&lt;INPUT onclick=&quot;window.external.ImportExportFavorites（true，&quot;&quot;&quot;&quot;）;&quot; type=button value=导入收藏夹 name=Button5&gt; </div><div class="line">&lt;INPUT onclick=&quot;window.external.ImportExportFavorites（false，&quot;&quot;&quot;&quot;）;&quot; type=button value=导出收藏夹 name=Button32&gt; </div><div class="line">&lt;INPUT onclick=&quot;window.external.AddFavorite（location.href， document.title）&quot; type=button value=参加收藏夹 name=Button22&gt; </div><div class="line"> &lt;INPUT onclick=&quot;window.external.ShowBrowserUI（&quot;&quot;OrganizeFavorites&quot;&quot;， null）&quot; type=button value=收拾收藏夹 name=Submit2&gt; </div><div class="line">&lt;INPUT onclick=&quot;&quot;window.location=&quot;view-source:&quot; + window.location.href&quot;&quot; type=button value=查看源文件 name=Button7&gt; </div><div class="line">&lt;INPUT onclick=&quot;window.external.ShowBrowserUI（&quot;&quot;LanguageDialog&quot;&quot;， null）&quot; type=button value=说话设置 name=Button6&gt; </div><div class="line"> &lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;Cut&quot;&quot;）&quot; type=button value=剪切&gt;</div><div class="line"> &lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;Copy&quot;&quot;）&quot; type=button value=拷贝&gt;</div><div class="line"> &lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;Paste&quot;&quot;）&quot; type=button value=粘贴&gt; </div><div class="line">&lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;Undo&quot;&quot;）&quot; type=button value=作废&gt;</div><div class="line"> &lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;Delete&quot;&quot;）&quot; type=button value=删除&gt; </div><div class="line">&lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;Bold&quot;&quot;）&quot; type=button value=黑体&gt;</div><div class="line"> &lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;Italic&quot;&quot;）&quot; type=button value=斜体&gt;</div><div class="line"> &lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;Underline&quot;&quot;）&quot; type=button value=下划线&gt;</div><div class="line"> &lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;stop&quot;&quot;）&quot; type=button value=停止&gt;</div><div class="line"> &lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;SaveAs&quot;&quot;）&quot; type=button value=保存&gt;</div><div class="line"> &lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;Saveas&quot;&quot;，false，&quot;&quot;c:\\test.htm&quot;&quot;）&quot; type=button value=另存为&gt; </div><div class="line">&lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;FontName&quot;&quot;，false，fn）&quot; type=button value=字体&gt; </div><div class="line">&lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;FontSize&quot;&quot;，false，fs）&quot; type=button value=字体大小&gt; </div><div class="line">&lt;INPUT onclick=&quot;document.execCommand（&quot;&quot;refresh&quot;&quot;，false，0）&quot; type=button value=刷新&gt; </div><div class="line">&lt;INPUT onclick=window.location.reload（） type=button value=刷新&gt;</div><div class="line"> &lt;INPUT onclick=history.go（1） type=button value=进步&gt;</div><div class="line"> &lt;INPUT onclick=history.go（-1） type=button value=撤退猬缩&gt;</div><div class="line"> &lt;INPUT onclick=history.forward（） type=button value=进步&gt;</div><div class="line"> &lt;INPUT onclick=history.back（） type=button value=撤退猬缩&gt;</div><div class="line"> &lt;INPUT onclick=&quot;&quot;window.external.ImportExportFavorites（true，&quot;http://localhost&quot;）;&quot;&quot;/ type=button value=导入收藏夹&gt; </div><div class="line">&lt;INPUT onclick=&quot;&quot;window.external.ImportExportFavorites（false，&quot;http://localhost&quot;）;&quot;&quot;/ type=button value=导出收藏夹&gt; </div><div class="line">&lt;INPUT onclick=&quot;window.external.ShowBrowserUI（&quot;&quot;OrganizeFavorites&quot;&quot;， null）&quot; type=button value=收拾收藏夹&gt; </div><div class="line">&lt;INPUT onclick=&quot;window.location = &quot;&quot;view-source:&quot;&quot;+ window.location.href&quot; type=button value=查看源文件&gt; </div><div class="line">&lt;INPUT onclick=&quot;window.external.ShowBrowserUI（&quot;&quot;LanguageDialog&quot;&quot;， null）&quot; type=button value=说话设置&gt; </div><div class="line">&lt;INPUT onclick=&quot;window.external.AddFavorite（&quot;&quot;http://www.cnblogs.com/hbzxf/&quot;&quot;， 阿好空间）&quot; type=button value=参加收藏夹&gt; </div><div class="line">&lt;INPUT onclick=&quot;window.external.addChannel（&quot;&quot;http://www.cnblogs.com/hbzxf/&quot;&quot;）&quot; type=button value=参加到频道&gt; </div><div class="line">&lt;INPUT onclick=&quot;this.style.behavior=&quot;&quot;url（＃default＃homepage）&quot;&quot;;this.setHomePage（&quot;&quot;http://www.cnblogs.com/hbzxf/&quot;&quot;）&quot; type=button value=设成主页&gt;</div></pre></td></tr></table></figure>
+<p>窗口打开主动最大化代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 窗口打开后最大化 --&gt;</div><div class="line">&lt;OBJECT id=&quot;max&quot; type=&quot;application/x-oleobject&quot; classid=&quot;clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11&quot;&gt;&lt;PARAM name=&quot;Command&quot; value=&quot;Maximize&quot;&gt;&lt;/OBJECT&gt;</div><div class="line">&lt;script&gt;</div><div class="line">if（window.screenLeft!=0） </div><div class="line">max.Click（）;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;!-- 窗口打开后最大化停止 --&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="哄骗脚本封装，便利实现网站悬浮告白"><a href="#哄骗脚本封装，便利实现网站悬浮告白" class="headerlink" title="哄骗脚本封装，便利实现网站悬浮告白"></a>哄骗脚本封装，便利实现网站悬浮告白</h2><p>下面是JS脚本（floatdiv.js）<br>/*======================================================================<br>  浮动块支撑脚本<br>  DESIGN BY :  彭国辉<br>  DATE:        2004-02-26<br>  SITE:        <a href="http://kacarton.yeah.net/" target="_blank" rel="external">http://kacarton.yeah.net/</a><br>  BLOG:        <a href="http://blog.csdn.net/nhconch" target="_blank" rel="external">http://blog.csdn.net/nhconch</a><br>  EMAIL:       kacarton＠sohu.com</p>
+<p>  文章为作者原创，转载前请先与本人接洽，转载请注明文章出处、保存作者信息，感谢支撑！<br>======================================================================*/<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">var alLeft = 0， alCenter = 1， alRight  = 2;   //程度对齐体式格式</div><div class="line">var alTop  = 0， alMiddle = 1， alBottom = 2;   //垂直对齐体式格式</div><div class="line"></div><div class="line"></div><div class="line">var f = new Array（）;</div><div class="line">var cnt = 0;</div><div class="line"></div><div class="line"></div><div class="line">function floatDiv（objId， align， vAlign， x， y， smooth）</div><div class="line">&#123;</div><div class="line">    /*浮动块对象</div><div class="line">      数据布局：</div><div class="line">        objId： 对象ID</div><div class="line">        align： 程度对齐体式格式，列举型</div><div class="line">        vAlign：垂直对齐体式格式，列举型内容</div><div class="line">        x， y：  xy座标，整型</div><div class="line">        smooth：腻滑移动，布尔型</div><div class="line">    */</div><div class="line">    this.objId  = objId;</div><div class="line">    this.align  = align;</div><div class="line">    this.vAlign = vAlign;</div><div class="line">    this.x = x;</div><div class="line">    this.y = y;</div><div class="line">    this.smooth = smooth;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">function addDiv（objId， align， vAlign， x， y， smooth）</div><div class="line">&#123;   //添加浮动块</div><div class="line">    f[cnt++] = new floatDiv（objId， align， vAlign， x， y， smooth）;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">function floatMove（）</div><div class="line">&#123;   //从头定位各块地位</div><div class="line">    var objX， objY;</div><div class="line">    if （document.all）</div><div class="line">    &#123;</div><div class="line">        var d = document.body;</div><div class="line">//status = &quot;scrollLeft:&quot;+f[0].objId.style.pixelTop+&quot;| offsetWidth:&quot;+d.offsetWidth;</div><div class="line">        for （var i=0; i&lt;f.length; i++）</div><div class="line">        &#123;</div><div class="line">            switch （f[i].align）</div><div class="line">            &#123;</div><div class="line">                case alLeft  : objX = d.scrollLeft + f[i].x; break;</div><div class="line">                case alCenter: objX = d.scrollLeft + Math.ceil（（d.offsetWidth - f[i].objId.offsetWidth）/2） + f[i].x; break;</div><div class="line">                case alRight : objX = d.scrollLeft + d.offsetWidth - f[i].x - f[i].objId.offsetWidth - 20; break; //减迁移转变条20</div><div class="line">            &#125;</div><div class="line">            switch （f[i].vAlign）</div><div class="line">            &#123;</div><div class="line">                case alTop   : objY = d.scrollTop + f[i].y; break;</div><div class="line">                case alMiddle: objY = d.scrollTop + Math.ceil（（d.offsetHeight - f[i].objId.offsetHeight）/2） + f[i].y; break;</div><div class="line">                case alBottom: objY = d.scrollTop + d.offsetHeight - f[i].y - f[i].objId.offsetHeight; break;</div><div class="line">            &#125;</div><div class="line">            if （f[i].smooth） smoothMove（f[i].objId， objX， objY）;</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                f[i].objId.style.pixelLeft = objX;</div><div class="line">                f[i].objId.style.pixelTop  = objY;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    if （document.layers）</div><div class="line">    &#123;</div><div class="line">        for （var i=0; i&lt;f.length; i++）</div><div class="line">        &#123;</div><div class="line">            var objId = f[i].objId;</div><div class="line">            switch （f[i].align）</div><div class="line">            &#123;</div><div class="line">                case alLeft  : objX = pageXOffset + f[i].x; break;</div><div class="line">                case alCenter: objX = pageXOffset + Math.ceil（（window.innerWidth-objId.width）/2） + f[i].x; break;</div><div class="line">                case alRight : objX = pageXOffset + window.innerWidth - f[i].x - document.objId.width; break;</div><div class="line">            &#125;</div><div class="line">            switch （f[i].vAlign）</div><div class="line">            &#123;</div><div class="line">                case alTop   : objY = pageYOffset + f[i].y; break;</div><div class="line">                case alMiddle: objY = pageYOffset + Math.ceil（window.innerHeight/2） + f[i].y; break;</div><div class="line">                case alBottom: objY = pageYOffset + window.innerHeight - f[i].y - document.objId.height; break;</div><div class="line">            &#125;</div><div class="line">            if （t[i].smooth） smoothMove（f[i].objId， objX， objY）;</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                document.objId.left = objX;</div><div class="line">                document.objId.top  = objY;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    setTimeout（&quot;floatMove（）;&quot;，50）;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">function smoothMove（obj， x， y）</div><div class="line">&#123;</div><div class="line">    var percent;</div><div class="line">    if （document.all）</div><div class="line">    &#123;</div><div class="line">        percent = .1 * （x - obj.style.pixelLeft）;</div><div class="line">        if （percent &gt; 0） percent = Math.ceil（percent）; else percent = Math.floor（percent）;</div><div class="line">        obj.style.pixelLeft += percent;</div><div class="line">        </div><div class="line">        percent = .1 * （y - obj.style.pixelTop）;</div><div class="line">        if （percent &gt; 0） percent = Math.ceil（percent）; else percent = Math.floor（percent）;</div><div class="line">        obj.style.pixelTop += percent;</div><div class="line">    &#125;</div><div class="line">    if （document.layers）</div><div class="line">    &#123;</div><div class="line">        percent = .1 * （x - document.objId.left）;</div><div class="line">        if （percent &gt; 0） percent = Math.ceil（percent）; else percent = Math.floor（percent）;</div><div class="line">        document.objId.left += percent;</div><div class="line">        </div><div class="line">        percent = .1 * （y - document.objId.top）;</div><div class="line">        if （percent &gt; 0） percent = Math.ceil（percent）; else percent = Math.floor（percent）;</div><div class="line">        document.objId.top += percent;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">setTimeout（&quot;floatMove（）;&quot;，50）;</div></pre></td></tr></table></figure></p>
+<p>调用例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;script language=&quot;javascript&quot; src=&quot;lib/floatdiv.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;script language=&quot;javascript&quot;&gt;</div><div class="line">if （navigator.appName == &quot;Netscape&quot;）</div><div class="line">&#123;</div><div class="line">    document.write（&quot;&lt;layer id=ad_hr top=300 width=100 height=120&gt;&lt;a href=http://www.fpc.org.cn/hr/040522.htm target=_blank&gt;&lt;img src=&quot;&quot;ad/hr40522.gif&quot;&quot; width=120 height=180 border=0&gt;&lt;/a&gt;&lt;/layer&gt;&quot;）;</div><div class="line">&#125;</div><div class="line">else</div><div class="line">&#123;</div><div class="line">    document.write（&quot;&lt;div id=ad_hr style=&quot;&quot;position: absolute;width:120;top:300;left:5;visibility: visible;z-index: 1&quot;&quot;&gt;&lt;a href=http://www.fpc.org.cn/hr/040522.htm target=_blank&gt;&lt;img src=&quot;&quot;ad/hr40522.gif&quot;&quot; width=120 height=180 border=0&gt;&lt;/a&gt;&lt;/div&gt;&quot;）;</div><div class="line">&#125;</div><div class="line">addDiv（ad_hr， alRight， alTop， 0， 30， true）;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="原创-本身定义的简单办法验证表单数据"><a href="#原创-本身定义的简单办法验证表单数据" class="headerlink" title="[原创]本身定义的简单办法验证表单数据"></a>[原创]本身定义的简单办法验证表单数据</h2><p>办法很简单，先是定义好要验证的数组比如:<br>check_array[0]= new Array（title，留言主题不克不及为空!）;<br>然后断定，错误的就提示定义的内容，代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">&lt;script language=&quot;javascript&quot;&gt;</div><div class="line"> //表单验证法度；</div><div class="line">  </div><div class="line">  //定义获取表单位素；</div><div class="line">  function ￥（）</div><div class="line">  &#123; </div><div class="line">    var elements = new Array（）; </div><div class="line">  </div><div class="line">    for （var i = 0; i &lt; arguments.length; i++） &#123; </div><div class="line">   var element = arguments[i]; </div><div class="line">   if （typeof element == &quot;&quot;string&quot;&quot;） </div><div class="line">     element = document.getElementById（element）; </div><div class="line">  </div><div class="line">   if （arguments.length == 1） </div><div class="line">     return element; </div><div class="line">  </div><div class="line">   elements.push（element）; </div><div class="line">    &#125; </div><div class="line">  </div><div class="line">    return elements; </div><div class="line">  &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"> function checkform（）</div><div class="line"> &#123;</div><div class="line">  //定义要验证的表单数组；</div><div class="line">  var check_array=new Array（）;</div><div class="line">  check_array[0]= new Array（&quot;title&quot;，&quot;留言主题不克不及为空!&quot;）;</div><div class="line">  check_array[1]= new Array（&quot;name&quot;，&quot;姓名不克不及为空!&quot;）;</div><div class="line">  check_array[2]= new Array（&quot;email&quot;，&quot;电子邮件不克不及为空!&quot;）;</div><div class="line">  check_array[3]= new Array（&quot;phone&quot;，&quot;德律风不克不及为空!&quot;）;</div><div class="line">  check_array[4]= new Array（&quot;note&quot;，&quot;留言内容不克不及为空!&quot;）;</div><div class="line">   </div><div class="line">  //验证定义表单是否为空;</div><div class="line">  for（var i=0;i&lt;check_array.length;i++）</div><div class="line">  &#123; </div><div class="line">   if（￥（check_array[i][0]）.value==&quot;&quot;）</div><div class="line">   &#123;</div><div class="line">    alert（check_array[i][1]）;</div><div class="line">    ￥（check_array[i][0]）.focus（）;</div><div class="line">    return false;</div><div class="line">   &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line"> &#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+</the>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2015/10/28/Js大总结01/">Js大总结</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Borui520</a></p>
+        <p><span>Created:</span>2015-10-28, 22:18:09</p>
+        <p><span>Updated:</span>2016-10-18, 13:24:48</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2015/10/28/Js大总结01/" title="Js大总结">http://yoursite.com/2015/10/28/Js大总结01/</a>
+            <span class="copy-path" data-clipboard-text="From http://yoursite.com/2015/10/28/Js大总结01/　　By Borui520" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/10/21/Angular笔记02/">
+                    AngularJS笔记02
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Js大总结笔记01"><span class="toc-number">1.</span> <span class="toc-text">Js大总结笔记01</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript事务查询综合"><span class="toc-number">1.1.</span> <span class="toc-text">javascript事务查询综合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#点击网页正文函数调用触发器："><span class="toc-number">1.2.</span> <span class="toc-text">点击网页正文函数调用触发器：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IE功能汇总"><span class="toc-number">1.3.</span> <span class="toc-text">IE功能汇总</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哄骗脚本封装，便利实现网站悬浮告白"><span class="toc-number">1.4.</span> <span class="toc-text">哄骗脚本封装，便利实现网站悬浮告白</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原创-本身定义的简单办法验证表单数据"><span class="toc-number">1.5.</span> <span class="toc-text">[原创]本身定义的简单办法验证表单数据</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Js大总结　| Borui的技术博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/10/21/Angular笔记02/" title="Next: AngularJS笔记02">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2015/10/28/Js大总结01/">Js大总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/21/Angular笔记02/">AngularJS笔记02</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/16/Angular笔记01/">AngularJS笔记01</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/05/第一遍博客/">第一遍博客</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2015-2016 Borui520
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
